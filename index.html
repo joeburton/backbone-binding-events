@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>each model has a view</title>
+
+<script type='text/javascript' src='lib/jquery-1.6.4.js'></script>
+<script type='text/javascript' src="lib/underscore-min.js"></script>
+<script type='text/javascript' src="lib/backbone-min.js"></script>
+<script type='text/javascript' src="lib/jquery.tmpl.js"></script>
+
+
+<style type='text/css'>
+	ul {
+		margin-left: 10px;
+		padding-left: 10px;
+		list-style-type: circle;
+	}
+</style>
+
+<script type='text/javascript'>//<![CDATA[ 
+
+$(window).load(function(){
+
+	Item = Backbone.Model.extend({	
+		defaults: {
+			id: "missing", 
+			firstname: "missing",
+			surname: "missing"
+		}		
+	});
+	
+	ItemCollection = Backbone.Collection.extend({
+		model: Item
+	});
+
+	ItemListView = Backbone.View.extend({
+		
+		el: $('#showIt'),
+		
+		initialize: function(){
+			_.bindAll(this, "renderItem");
+		},
+
+		render: function(){
+		
+			this.collection.each(this.renderItem);
+			
+		},
+		
+		renderItem: function(model){
+		
+			var listItem = new ItemView({model: model});
+			
+			listItem.render();
+			
+			$(this.el).append(listItem.el);
+			
+		}
+		
+	});
+	
+	ItemView = Backbone.View.extend({
+		
+		tagName: "li",
+		
+		events: {
+			"click a": "clicked",
+			"click a.edit": "edit"
+		},
+
+		initialize: function(){
+		   this.render = _.bind(this.render, this); 
+		   this.model.bind('change:surname', this.render);
+		},
+		
+		edit: function(){
+		
+			var name = this.model.get("surname"),
+				id = this.model.get("id");
+			
+			if (this.model.get('id') == "2") {
+				this.model.set({"surname": "Burton"});
+			}
+			
+		},		
+		
+		clicked: function(){
+		
+			var name = this.model.get("surname"),
+				id = this.model.get("id");
+			
+			if (this.model.get('id') == "2") {
+				this.model.set({"surname": "Burton"});
+			}
+			
+		},
+		
+		render: function(){
+			
+			var template = $("#item-template");
+			
+			var link = template.tmpl(this.model.toJSON());
+			
+			$(this.el).html(link);
+			
+		}  
+		
+	});
+	
+	var items = new ItemCollection([
+		{id: 1, firstname: "Joe", surname: "Burton"},
+		{id: 2, firstname: "Miriam", surname: "Heinke"},
+		{id: 3, firstname: "Gail", surname: "Burton"},
+		{id: 4, firstname: "Paul", surname: "Burton"},
+		{id: 5, firstname: "Sue", surname: "Burton"}
+	]);
+
+	var app = new ItemListView({collection: items}).render();
+		
+});//]]>  
+
+</script>
+
+</head>
+<body>
+
+<script id="item-template" type="text/x-jquery-tmpl">
+<a href="#" data-id="${id}">${firstname} ${surname}</a> - <a href="#" class="edit">edit</a>
+</script>
+
+<ul id="showIt"></ul>
+  
+</body>
+</html>
