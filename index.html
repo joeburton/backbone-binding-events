@@ -71,8 +71,7 @@ $(window).load(function(){
 		},
 
 		initialize: function(){
-			_.bindAll(this);
-			//this.render = _.bind(this.render, this);
+			_.bindAll(this, 'render');
 			this.model.bind('change:surname', this.render);
 			console.log('ItemView context of this', this);	
 		},
