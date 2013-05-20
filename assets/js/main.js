@@ -1,100 +1,115 @@
+var app = app || {};
 
-$(window).load(function(){
 
-	Item = Backbone.Model.extend({	
-		defaults: {
-			id: "missing", 
-			firstname: "missing",
-			surname: "missing"
-		}		
-	});
+app.Item = Backbone.Model.extend({	
+	defaults: {
+		id: "missing", 
+		firstname: "missing",
+		surname: "missing"
+	}		
+});
+
+
+app.ItemCollection = Backbone.Collection.extend({
+	model: app.Item
+});
+
+
+app.ItemListView = Backbone.View.extend({
 	
-	ItemCollection = Backbone.Collection.extend({
-		model: Item
-	});
+	el: $('#showIt'),
+	
+	initialize: function(){
+		_.bindAll(this, 'renderItem');
+		console.log('ItemListView context of this', this);
+	},
 
-	ItemListView = Backbone.View.extend({
+	render: function(){
 		
-		el: $('#showIt'),
-		
-		initialize: function(){
-			_.bindAll(this, 'renderItem');
-			console.log('ItemListView context of this', this);
-		},
+		this.collection.each(this.renderItem);
 
-		render: function(){
-			this.collection.each(this.renderItem);
-		},
+	},
+	
+	renderItem: function(model){
+	
+		var listItem = new app.ItemView({model: model});
+
+		listItem.render();
 		
-		renderItem: function(model){
+		$(this.el).append(listItem.el);
 		
-			var listItem = new ItemView({model: model});
-			
-			listItem.render();
-			
-			$(this.el).append(listItem.el);
-			
+	}
+	
+});
+
+
+app.ItemView = Backbone.View.extend({
+	
+	tagName: "li",
+	
+	events: {
+		"click a": "clicked",
+		"click a.edit": "edit",
+		"click a.try": "try"
+	},
+
+	initialize: function(){
+
+		_.bindAll(this, 'render');
+
+		this.model.bind('change:surname', this.render, this);
+
+		console.log('ItemView context of this', this);	
+
+	},
+	
+	edit: function(){
+	
+		var name = this.model.get("surname"),
+			id = this.model.get("id");
+		
+		if (this.model.get('id') == "2") {
+			this.model.set({"surname": "Shakespeare"});
 		}
 		
-	});
+	},		
 	
-	ItemView = Backbone.View.extend({
+	try: function(){
 		
-		tagName: "li",
+		if (this.model.has('surname')) {
+			console.log(this.model.get('surname'));
+		}
 		
-		events: {
-			"click a": "clicked",
-			"click a.edit": "edit"
-		},
-
-		initialize: function(){
-			_.bindAll(this, 'render');
-			this.model.bind('change:surname', this.render);
-			console.log('ItemView context of this', this);	
-		},
-		
-		edit: function(){
-		
-			var name = this.model.get("surname"),
-				id = this.model.get("id");
-			
-			if (this.model.get('id') == "2") {
-				this.model.set({"surname": "Shakespeare"});
-			}
-			
-		},		
-		
-		clicked: function(){
-		
-			var name = this.model.get("surname"),
-				id = this.model.get("id");
-			
-			if (this.model.get('id') == "3") {
-				this.model.set({"surname": "Burton"});
-			}
-			
-		},
-		
-		render: function(){
-			
-			var template = $("#item-template");
-			
-			var item = template.tmpl(this.model.toJSON());
-			
-			$(this.el).html(item);
-			
-		}  
-		
-	});
+	},		
 	
-	var items = new ItemCollection([
-		{id: 1, firstname: "Albert", surname: "Einstein"},
-		{id: 2, firstname: "William", surname: "Drake"},
-		{id: 3, firstname: "Michael", surname: "Jackson"},
-		{id: 4, firstname: "Walt ", surname: "Disney"},
-		{id: 5, firstname: "John", surname: "Lennon"}
-	]);
-
-	var app = new ItemListView({collection: items}).render();
+	clicked: function(){
+	
+		var name = this.model.get("surname"),
+			id = this.model.get("id");
 		
+		if (this.model.get('id') == "4") {
+			this.model.set({"surname": "Burton"});
+		}
+		
+	},
+	
+	render: function(){
+		
+		var template = $("#item-template");
+		
+		var item = template.tmpl(this.model.toJSON());
+		
+		$(this.el).html(item);
+		
+	}  
+	
 });
+
+
+app.items = new app.ItemCollection([
+	{id: 1, firstname: "Albert", surname: "Einstein"},
+	{id: 2, firstname: "William", surname: "Drake"},
+	{id: 3, firstname: "Michael", surname: "Jackson"},
+	{id: 4, firstname: "Walt ", surname: "Disney"},
+	{id: 5, firstname: "John", surname: "Lennon"}
+]);
