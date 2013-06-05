@@ -6,14 +6,16 @@ app.Item = Backbone.Model.extend({
 		id: "missing", 
 		firstname: "missing",
 		surname: "missing"
-	}		
+	}	
 });
 
 
 app.ItemCollection = Backbone.Collection.extend({
-	model: app.Item
+	model: app.Item,
+	url: 'http://localhost/~joeburton/labs/binding-events/data_json.php?role=all'
 });
 
+//console.log(new app.ItemCollection(), new app.Item());
 
 app.ItemListView = Backbone.View.extend({
 	
@@ -21,10 +23,11 @@ app.ItemListView = Backbone.View.extend({
 	
 	initialize: function(){
 		_.bindAll(this, 'renderItem');
-		console.log('ItemListView context of this', this);
 	},
 
 	render: function(){
+		
+		//console.log('ItemListView context of this', this, this.collection);
 		
 		this.collection.each(this.renderItem);
 
@@ -106,10 +109,5 @@ app.ItemView = Backbone.View.extend({
 });
 
 
-app.items = new app.ItemCollection([
-	{id: 1, firstname: "Albert", surname: "Einstein"},
-	{id: 2, firstname: "William", surname: "Drake"},
-	{id: 3, firstname: "Michael", surname: "Jackson"},
-	{id: 4, firstname: "Walt ", surname: "Disney"},
-	{id: 5, firstname: "John", surname: "Lennon"}
-]);
+
+
