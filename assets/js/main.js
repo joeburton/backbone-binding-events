@@ -19,15 +19,68 @@ app.ItemCollection = Backbone.Collection.extend({
 
 app.ItemListView = Backbone.View.extend({
 	
-	el: $('#showIt'),
+	el: $('#stage'),
 	
-	initialize: function(){
-		_.bindAll(this, 'renderItem');
+	events: {
+		"click .try": "addModel",
+		"click .num": "changeNumbers"
 	},
 
-	render: function(){
+	initialize: function(){
 		
-		//console.log('ItemListView context of this', this, this.collection);
+		var that = this, // fix scope of this to that
+			results = this.$el.find('#results');
+
+		_.bindAll(this, 'renderItem');
+
+		this.collection.on("add", function(model) {
+		  	results.html('');
+			that.collection.each(that.renderItem);
+			console.log(model.id + " : " + model.get('surname'));
+		});
+
+		var alphabetical = this.collection.sortBy(function(model) {
+			return model.get("surname");
+		});
+
+		console.log(alphabetical);
+
+	},
+
+
+	changeNumbers: function() {
+
+		var myNumber = parseInt($('#mynumber').val());
+		//var myNumber = $('#mynumber').val();
+		//var myNumber = {};
+		//var myNumber = [];
+		//var myNumber;
+		
+		console.log(myNumber);
+
+		// if (isNaN(myNumber)) {
+			
+		// 	console.log(isNaN(myNumber));
+
+		// }
+
+		// check is if array
+		// if (myNumber instanceof Array) {
+			
+		// 	console.log(typeof myNumber);
+
+		// }
+	},
+
+	addModel: function(e){
+
+		e.preventDefault();
+		
+		this.collection.add([{id: 6, firstname: "James", surname: "Brown"}]);	
+		
+	},	
+
+	render: function(){
 		
 		this.collection.each(this.renderItem);
 
@@ -35,12 +88,13 @@ app.ItemListView = Backbone.View.extend({
 	
 	renderItem: function(model){
 	
-		var listItem = new app.ItemView({model: model});
-
+		var listItem = new app.ItemView({model: model}),
+			results = this.$el.find('#results');
+		
 		listItem.render();
-		
-		$(this.el).append(listItem.el);
-		
+
+		results.append(listItem.el);				
+
 	}
 	
 });
@@ -52,8 +106,7 @@ app.ItemView = Backbone.View.extend({
 	
 	events: {
 		"click a": "clicked",
-		"click a.edit": "edit",
-		"click a.try": "try"
+		"click a.edit": "edit"
 	},
 
 	initialize: function(){
@@ -75,15 +128,7 @@ app.ItemView = Backbone.View.extend({
 			this.model.set({"surname": "Shakespeare"});
 		}
 		
-	},		
-	
-	try: function(){
-		
-		if (this.model.has('surname')) {
-			console.log(this.model.get('surname'));
-		}
-		
-	},		
+	},	
 	
 	clicked: function(){
 	
