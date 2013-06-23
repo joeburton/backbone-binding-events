@@ -4,16 +4,11 @@
 <head>
 
 	<meta charset="utf-8">
-	
-	<title>Boilerplate</title>
 
-	<meta name="title" content="TBC">
-	<meta name="description" content="Development file created by GB">
-	
-	<meta name="author" content="Gingerblue Limitied">
-	<meta name="Copyright" content="Gingerblue Limitied" />
+	<title>app structure</title>
 
-	<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
+	<meta name="description" content="html5 Template">
+    <!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
 	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
 		
 	<link rel="stylesheet" media="all" href="assets/css/reset.css"/>
@@ -44,16 +39,25 @@
 </head>
 <body>
 
-	<div id="wrapper">
+	<div class="wrapper">
 
-		<div class="inner">
+		<div class="inner" id="stage">
 
 			<header>
-				<h1>backbone binding events</h1>
+				<h1>backbone - binding events</h1>
 			</header>
+
+			<input type="hidden" name="mynumber" id="mynumber" value="204" />
 			
-			<div id="main">
-			<ul id="showIt"></ul>
+			<div class="main">
+			
+				<ul id="results"></ul>
+				<h2>Custom Triggers</h2>
+				<ul id="results">
+					<li><a href="#" class="try">add model</a></li>
+					<li><a href="#" class="num">numbers</a></li>
+				</ul>
+			
 			</div>
 			
 			<footer>
@@ -69,6 +73,7 @@
 	<script type='text/javascript' src="assets/js/lib/backbone-min.js"></script>
 	<script type='text/javascript' src="assets/js/lib/jquery.tmpl.js"></script>
 	<script type="text/javascript" src="assets/js/main.js"></script>
-	
+	<script type="text/javascript" src="assets/js/app.js"></script>
+
 </body>
 </html>

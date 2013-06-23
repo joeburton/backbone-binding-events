@@ -5,18 +5,22 @@
 
 
 body {
+	background: #f4f4f4 url(../images/body.gif);
 	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes width: 992px; */
 }
 
-#wrapper {
+.wrapper {
+	-moz-box-shadow:0px 0px 7px 0px rgba(119, 119, 119, 0.5);
+	-webkit-box-shadow:0px 0px 7px 0px rgba(119, 119, 119, 0.5);
+	box-shadow:0px 0px 7px 0px rgba(119, 119, 119, 0.5);
 	border-radius: 10px;
 	max-width:480px;
-	background: #ccc;
+	background: #e2e2ea;
 	margin: 0 auto;
 	margin-top: 10px;
 }	
 
-#main {
+.main {
 	border-radius: 6px;
 	max-width:480px;
 	background: #fff;
@@ -53,6 +57,14 @@ button.add {
 	border-radius: 3px;
 	padding: 10px;
 	margin:  0 0 0 0;
+}
+
+ul {
+	padding: 5px;
+}
+
+ul li {
+	margin: 0 0 3px 0;
 }
 
 /* Landscape smartphone
