@@ -27,7 +27,7 @@ app.ItemListView = Backbone.View.extend({
 	},
 
 	initialize: function(){
-		
+
 		var that = this, // fix scope of this to that
 			results = this.$el.find('#results');
 
@@ -39,6 +39,9 @@ app.ItemListView = Backbone.View.extend({
 			console.log(model.id + " : " + model.get('surname'));
 		});
 
+		/*
+		order items alphabetically
+		*/
 		var alphabetical = this.collection.sortBy(function(model) {
 			return model.get("surname");
 		});
