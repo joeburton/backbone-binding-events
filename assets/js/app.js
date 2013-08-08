@@ -17,23 +17,23 @@ var app = app || {};
 	]);
 
 	new app.ItemListView({collection: app.items}).render();	
-
+    
 
 	/*
 	call to MySQL databse to get resutls
-	*/
+	
+    app.items = new app.ItemCollection();
+	app.items.fetch({
 
-	// app.items = new app.ItemCollection();
-	// app.items.fetch({
-
-	// 	success:function () {
+	success:function () {
 			
-	// 		new app.ItemListView({collection: app.items}).render();
+        new app.ItemListView({collection: app.items}).render();
 
-	// 	}
+	 	}
 
-	// });
-
+	});
+    */
+    
 	// console.log( "version: " + $.fn.jquery + "<br>" );
 	// console.log( "version: " + jQuery.fn.jquery + "<br>" );
 

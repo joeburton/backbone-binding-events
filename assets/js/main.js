@@ -1,7 +1,6 @@
 
 var app = app || {};
 
-
 app.Item = Backbone.Model.extend({	
 	defaults: {
 		id: "missing", 
@@ -10,10 +9,9 @@ app.Item = Backbone.Model.extend({
 	}	
 });
 
-
 app.ItemCollection = Backbone.Collection.extend({
 	model: app.Item,
-	url: 'http://localhost/~joeburton/labs/binding-events/data_json.php?role=all'
+	url: 'http://localhost/labs/backbone/binding-events/data_json.php?role=all'
 });
 
 //console.log(new app.ItemCollection(), new app.Item());
@@ -51,7 +49,6 @@ app.ItemListView = Backbone.View.extend({
 
 	},
 
-
 	changeNumbers: function() {
 
 		var myNumber = parseInt($('#mynumber').val());
@@ -80,8 +77,8 @@ app.ItemListView = Backbone.View.extend({
 
 		e.preventDefault();
 		
-		this.collection.add([{id: 6, firstname: "James", surname: "Brown"}]);	
-		
+		this.collection.add([{id: 6, firstname: "James", surname: "Brown"},{id: 7, firstname: "Toby", surname: "Bart"}]);	
+
 	},	
 
 	render: function(){

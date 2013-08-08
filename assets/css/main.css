@@ -60,11 +60,16 @@ button.add {
 }
 
 ul {
-	padding: 5px;
+    margin-left: 10px;
+    padding-left: 10px;
+    list-style-type: circle;
+    padding: 10px 10px 10px 20px;
 }
-
-ul li {
-	margin: 0 0 3px 0;
+li {
+    padding: 0 0 10px 0;
+}
+li:last-child {
+    padding: 0 0 0 0;
 }
 
 /* Landscape smartphone
