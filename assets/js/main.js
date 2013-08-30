@@ -141,14 +141,18 @@ app.ItemView = Backbone.View.extend({
 		}
 		
 	},
+    
+    template: _.template($('#item-template').html()),
 	
 	render: function(){
 		
-		var template = $("#item-template");
+		//var template = $("#item-template");
 		
-		var item = template.tmpl(this.model.toJSON());
+		//var item = template.tmpl(this.model.toJSON());
 		
-		$(this.el).html(item);
+		//$(this.el).html(item);
+        
+        $(this.el).html(this.template(this.model.toJSON()));
 		
 	}  
 	
