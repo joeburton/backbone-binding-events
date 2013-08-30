@@ -55,6 +55,19 @@ button.add {
 	margin:  0 0 0 0;
 }
 
+ul {
+    margin-left: 10px;
+    padding-left: 10px;
+    list-style-type: circle;
+    padding: 10px 10px 10px 20px;
+}
+li {
+    padding: 0 0 10px 0;
+}
+li:last-child {
+    padding: 0 0 0 0;
+}
+
 /* Landscape smartphone
 @media screen and (min-width: 480px) {
     #wrapper {

@@ -22,23 +22,8 @@
 	
 	<script src="assets/js/lib/modernizr.js"></script>
 
-	<style type='text/css'>
-		ul {
-			margin-left: 10px;
-			padding-left: 10px;
-			list-style-type: circle;
-			padding: 10px 10px 10px 20px;
-		}
-		li {
-			padding: 0 0 10px 0;
-		}
-		li:last-child {
-			padding: 0 0 0 0;
-		}
-	</style>
-
 	<script id="item-template" type="text/x-jquery-tmpl">
-	<a href="#" data-id="${id}">${firstname} ${surname}</a> - <a href="#" class="edit">edit</a>
+	<a href="#" data-id="<%=id%>"><%=firstname%> <%=surname%></a> - <a href="#" class="edit">edit</a>
 	</script>
 
 </head>
