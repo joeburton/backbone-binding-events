@@ -11,7 +11,8 @@ app.Item = Backbone.Model.extend({
 
 
 app.ItemCollection = Backbone.Collection.extend({
-	model: app.Item
+	model: app.Item,
+	url: 'http://localhost/labs/backbone/binding-events/data_json.php?role=all'
 });
 
 
@@ -104,12 +105,3 @@ app.ItemView = Backbone.View.extend({
 	}  
 	
 });
-
-
-app.items = new app.ItemCollection([
-	{id: 1, firstname: "Albert", surname: "Einstein"},
-	{id: 2, firstname: "William", surname: "Drake"},
-	{id: 3, firstname: "Michael", surname: "Jackson"},
-	{id: 4, firstname: "Walt ", surname: "Disney"},
-	{id: 5, firstname: "John", surname: "Lennon"}
-]);
