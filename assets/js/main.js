@@ -24,8 +24,7 @@ var app = app || {};
         el: $('#stage'),
         
         events: {
-            "click .try": "addModel",
-            "click .num": "changeNumbers"
+            "click .try": "addModel"
         },
 
         initialize: function(){
@@ -52,30 +51,6 @@ var app = app || {};
 
         },
 
-        changeNumbers: function() {
-
-            var myNumber = parseInt($('#mynumber').val());
-            //var myNumber = $('#mynumber').val();
-            //var myNumber = {};
-            //var myNumber = [];
-            //var myNumber;
-            
-            console.log(myNumber);
-
-            // if (isNaN(myNumber)) {
-                
-            // 	console.log(isNaN(myNumber));
-
-            // }
-
-            // check is if array
-            // if (myNumber instanceof Array) {
-                
-            // 	console.log(typeof myNumber);
-
-            // }
-        },
-
         addModel: function(e){
 
             e.preventDefault();
@@ -96,7 +71,9 @@ var app = app || {};
                 results = this.$el.find('#results');
             
             listItem.render();
-
+            
+            console.log(listItem.el);
+            
             results.append(listItem.el);				
 
         }
@@ -124,10 +101,10 @@ var app = app || {};
         },
         
         edit: function(){
-        
+            /*
             var name = this.model.get("surname"),
                 id = this.model.get("id");
-            
+            */
             if (this.model.get('id') == "2") {
                 this.model.set({"surname": "Shakespeare"});
             }
@@ -135,10 +112,10 @@ var app = app || {};
         },	
         
         clicked: function(){
-        
+            /*
             var name = this.model.get("surname"),
                 id = this.model.get("id");
-            
+            */
             if (this.model.get('id') == "4") {
                 this.model.set({"surname": "Burton"});
             }
