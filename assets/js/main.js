@@ -34,10 +34,10 @@ var app = app || {};
                 results = this.$el.find('#results');
 
             _.bindAll(this, 'renderItem');
-
+        
             this.collection.on("add", function(model) {
-                results.html('');
-                that.collection.each(that.renderItem);
+                //results.html('');
+                that.renderItem(model);
                 console.log(model.id + " : " + model.get('surname'));
             });
 
@@ -148,12 +148,6 @@ var app = app || {};
         template: _.template($('#item-template').html()),
         
         render: function(){
-            
-            //var template = $("#item-template");
-            
-            //var item = template.tmpl(this.model.toJSON());
-            
-            //$(this.el).html(item);
             
             $(this.el).html(this.template(this.model.toJSON()));
             
