@@ -2,7 +2,7 @@
 	
 	$dbhost="localhost";
 	$dbusername="root";
-	$dbpassword="";
+	$dbpassword="my-new-password";
 	$dbname="dev";
 	
 	// Connect to Mysql

@@ -4,17 +4,17 @@ var app = app || {};
 
     'use strict';
     
-    app.Item = Backbone.Model.extend({	
+    app.Item = Backbone.Model.extend({  
         defaults: {
             id: "missing", 
             firstname: "missing",
             surname: "missing"
-        }	
+        }   
     });
 
     app.ItemCollection = Backbone.Collection.extend({
         model: app.Item,
-        url: 'http://localhost/labs/backbone/binding-events/data_json.php?role=all'
+        url: 'http://localhost/~joe/labs/backbone-binding-events/data_json.php?role=all'
     });
 
     //console.log(new app.ItemCollection(), new app.Item());
@@ -64,14 +64,14 @@ var app = app || {};
 
             // if (isNaN(myNumber)) {
                 
-            // 	console.log(isNaN(myNumber));
+            //  console.log(isNaN(myNumber));
 
             // }
 
             // check is if array
             // if (myNumber instanceof Array) {
                 
-            // 	console.log(typeof myNumber);
+            //  console.log(typeof myNumber);
 
             // }
         },
@@ -80,9 +80,9 @@ var app = app || {};
 
             e.preventDefault();
             
-            this.collection.add([{id: 6, firstname: "James", surname: "Brown"},{id: 7, firstname: "Toby", surname: "Bart"}]);	
+            this.collection.add([{id: 6, firstname: "James", surname: "Brown"},{id: 7, firstname: "Toby", surname: "Bart"}]);   
 
-        },	
+        },  
 
         render: function(){
             
@@ -97,7 +97,7 @@ var app = app || {};
             
             listItem.render();
 
-            results.append(listItem.el);				
+            results.append(listItem.el);                
 
         }
         
@@ -119,7 +119,7 @@ var app = app || {};
 
             this.model.bind('change:surname', this.render, this);
 
-            console.log('ItemView context of this', this);	
+            console.log('ItemView context of this', this);  
 
         },
         
@@ -132,7 +132,7 @@ var app = app || {};
                 this.model.set({"surname": "Shakespeare"});
             }
             
-        },	
+        },  
         
         clicked: function(){
         
